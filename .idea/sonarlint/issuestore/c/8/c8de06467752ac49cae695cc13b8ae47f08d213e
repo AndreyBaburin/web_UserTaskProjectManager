@@ -1,0 +1,19 @@
+
+<
+java:S1170"!Make this final field static too.(µšåËùÿÿÿÿ
+i
+java:S1989&"NHandle the following exception that could be thrown by "addTask": IOException.(Ü˜ÿÿÿÿÿ
+l
+java:S1989)"QHandle the following exception that could be thrown by "updateTask": IOException.(¥úÇ¬üÿÿÿÿ
+g
+java:S1989,"QHandle the following exception that could be thrown by "deleteTask": IOException.(üÊÈ¨
+n
+java:S1989/"SHandle the following exception that could be thrown by "sendRedirect": IOException.(Šûžßýÿÿÿÿ
+{
+java:S1989:"fHandle the following exceptions that could be thrown by "showAllTasks": ServletException, IOException.(ÇÛÑ6
+n
+java:S1989<"SHandle the following exception that could be thrown by "sendRedirect": IOException.(Šûžßýÿÿÿÿ
+s
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(˜†ñ©ûÿÿÿÿ
+n
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(¸œÐÁ

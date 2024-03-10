@@ -1,0 +1,14 @@
+
+i	java:S116	"NRename this field "URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ì ‡ 8ªûÊÆá1
+k	java:S116
+"ORename this field "NAME" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢¶Ñ8•—ÍÆá1
+o	java:S116"SRename this field "PASSWORD" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…ø®»8èÉĞÆá1
+=
+java:S1170	"!Make this final field static too.(ì ‡ 8«ûÊÆá1
+>
+java:S1170
+"!Make this final field static too.(¢¶Ñ8•ÏÆá1
+>
+java:S1170"!Make this final field static too.(…ø®»8µèÏÆá1
+O
+java:S4925 "-Remove this "Class.forName()", it is useless.(õ†¨Äùÿÿÿÿ8´ûÊÆá1

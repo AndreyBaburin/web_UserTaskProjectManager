@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+  prod-db:
+    image: postgres:14-alpine
+    container_name: postgres_db
+
+    ports:
+      - "6541:5432"
+    environment:
+      POSTGRES_DB: "manager_db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "12345"
+      POSTGRES_URL: "jdbc:postgresql://localhost:6541/manager_db"
+
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  test-db:
+    image: postgres:14-alpine
+    container_name: test_postgres_db
+
+    ports:
+      - "6542:5432"
+
+    environment:
+      POSTGRES_DB: "test_manager_db"
+      POSTGRES_USER: "test_user"
+      POSTGRES_PASSWORD: "test_password"
+      POSTGRES_URL: "jdbc:postgresql://localhost:6542/test_manager_db"
+
+    volumes:
+      - ./test.sql:/docker-entrypoint-initdb.d/test.sql

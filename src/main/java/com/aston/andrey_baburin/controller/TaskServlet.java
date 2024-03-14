@@ -4,6 +4,8 @@ import com.aston.andrey_baburin.JDBCImpl.TaskJDBC;
 import com.aston.andrey_baburin.JDBCImpl.UserJDBC;
 import com.aston.andrey_baburin.entity.Task;
 import com.aston.andrey_baburin.entity.User;
+import com.aston.andrey_baburin.entity.dto.TaskDto;
+import com.aston.andrey_baburin.entity.dto.UserDto;
 import com.aston.andrey_baburin.processor.TaskProcessor;
 import com.aston.andrey_baburin.processor.UserProcessor;
 import com.aston.andrey_baburin.util.DBConnector;
@@ -65,11 +67,11 @@ public class TaskServlet extends HttpServlet {
             throws IOException {
         String title = request.getParameter("title");
         String userId = request.getParameter("id");
-        Task task = new Task();
-        User user = userProcessor.getUserById(Integer.parseInt(userId));
-        task.setTitle(title);
-        task.setUser(user);
-        taskProcessor.createTask(task);
+        TaskDto taskDto = new TaskDto();
+        UserDto userDto = userProcessor.getUserById(Integer.parseInt(userId));
+        taskDto.setTitle(title);
+        taskDto.setUserDto(userDto);
+        taskProcessor.createTask(taskDto);
         response.sendRedirect(request.getContextPath() + tasksPageURL);
     }
 
@@ -81,11 +83,11 @@ public class TaskServlet extends HttpServlet {
 
         if (id != null) {
             try {
-                Task task = new Task();
-                task.setId(Integer.parseInt(id));
-                task.setTitle(title);
-                task.setUser(userProcessor.getUserById(Integer.parseInt(userId)));
-                taskProcessor.updateTask(task);
+                TaskDto taskDto = new TaskDto();
+                taskDto.setId(Integer.parseInt(id));
+                taskDto.setTitle(title);
+                taskDto.setUserDto(userProcessor.getUserById(Integer.parseInt(userId)));
+                taskProcessor.updateTask(taskDto);
                 response.sendRedirect(request.getContextPath() + tasksPageURL);
 
             } catch (NumberFormatException e) {
@@ -113,7 +115,7 @@ public class TaskServlet extends HttpServlet {
 
     public void showAllTasks(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Task> tasks = taskProcessor.getAllTasks();
+        List<TaskDto> tasks = taskProcessor.getAllTasks();
         request.setAttribute("tasks", tasks);
         request.getRequestDispatcher("tasksPage.jsp").forward(request, response);
     }

@@ -4,6 +4,10 @@ package com.aston.andrey_baburin.processor;
 import com.aston.andrey_baburin.JDBCImpl.ProjectJDBC;
 import com.aston.andrey_baburin.entity.Project;
 import com.aston.andrey_baburin.entity.Task;
+import com.aston.andrey_baburin.entity.dto.ProjectDto;
+import com.aston.andrey_baburin.entity.dto.TaskDto;
+import com.aston.andrey_baburin.entity.mapper.ProjectMapper;
+import com.aston.andrey_baburin.entity.mapper.TaskMapper;
 import com.aston.andrey_baburin.services.ProjectService;
 
 
@@ -18,17 +22,19 @@ public class ProjectProcessor implements ProjectService {
     }
 
     @Override
-    public List<Project> getAllProject() {
-        return projectJDBC.getAllProject();
+    public List<ProjectDto> getAllProject() {
+        return ProjectMapper.INSTANCE.toDtoList(projectJDBC.getAllProject());
     }
 
     @Override
-    public void createProject(Project project) {
+    public void createProject(ProjectDto projectDto) {
+        Project project = ProjectMapper.INSTANCE.toEntity(projectDto);
         projectJDBC.addProject(project);
     }
 
     @Override
-    public void updateProject(Project project) {
+    public void updateProject(ProjectDto projectDto) {
+        Project project = ProjectMapper.INSTANCE.toEntity(projectDto);
         projectJDBC.updateProject(project);
     }
 
@@ -38,7 +44,8 @@ public class ProjectProcessor implements ProjectService {
     }
 
     @Override
-    public List<Task> getTasksOfProject(int id) {
-        return projectJDBC.getTasksOfProject(id);
+    public List<TaskDto> getTasksOfProject(int id) {
+        List<Task> tasks = projectJDBC.getTasksOfProject(id);
+        return TaskMapper.INSTANCE.toDtoList(tasks);
     }
 }

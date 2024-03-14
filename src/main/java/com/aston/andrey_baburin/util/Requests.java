@@ -37,4 +37,8 @@ public enum Requests {
             " WHERE tp.project_id = ?");
 
     String query;
+
+    public String getQuery() {
+        return query;
+    }
 }

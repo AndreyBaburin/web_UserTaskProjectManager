@@ -2,18 +2,19 @@ package com.aston.andrey_baburin.services;
 
 
 import com.aston.andrey_baburin.entity.Task;
+import com.aston.andrey_baburin.entity.dto.TaskDto;
 
 import java.util.List;
 
 public interface TaskService {
-    List<Task> getAllTasks();
+    List<TaskDto> getAllTasks();
 
-    void createTask(Task task);
+    void createTask(TaskDto taskDto);
 
-    void updateTask(Task task);
+    void updateTask(TaskDto taskDto);
 
     void deleteById(int id);
 
-    Task getTaskById (int id);
+    TaskDto getTaskById (int id);
 
 }

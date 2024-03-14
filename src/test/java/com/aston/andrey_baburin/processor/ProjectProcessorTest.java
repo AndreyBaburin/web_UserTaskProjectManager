@@ -4,6 +4,9 @@ import com.aston.andrey_baburin.JDBCImpl.ProjectJDBC;
 import com.aston.andrey_baburin.entity.Project;
 import com.aston.andrey_baburin.entity.Task;
 import com.aston.andrey_baburin.entity.User;
+import com.aston.andrey_baburin.entity.dto.ProjectDto;
+import com.aston.andrey_baburin.entity.dto.TaskDto;
+import com.aston.andrey_baburin.entity.dto.UserDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -26,11 +29,11 @@ class ProjectProcessorTest extends Mockito {
 
     @Test
     void testCreateProject() {
-        User user = new User(77, "Test77", "test@mail.com");
-        Task task = new Task(1, "Test Task", user);
-        List<Task> tasks = new ArrayList<>();
+        UserDto user = new UserDto(77, "Test77", "test@mail.com");
+        TaskDto task = new TaskDto(1, "Test Task", user);
+        List<TaskDto> tasks = new ArrayList<>();
         tasks.add(task);
-        Project project = new Project(88,"defenition_test", tasks);
+        ProjectDto project = new ProjectDto(88,"defenition_test", tasks);
         projectProcessor.createProject(project);
         verify(projectJDBC, times(1)).addProject(any(Project.class));
     }
@@ -43,11 +46,11 @@ class ProjectProcessorTest extends Mockito {
 
     @Test
     void testUpdateProject() {
-        User user = new User(76, "Test76", "test@mail.com");
-        Task task = new Task(2, "Test Task2", user);
-        List<Task> tasks = new ArrayList<>();
+        UserDto user = new UserDto(76, "Test76", "test@mail.com");
+        TaskDto task = new TaskDto(2, "Test Task2", user);
+        List<TaskDto> tasks = new ArrayList<>();
         tasks.add(task);
-        Project project = new Project(88,"defenition_test2", tasks);
+        ProjectDto project = new ProjectDto(88,"defenition_test2", tasks);
         projectProcessor.updateProject(project);
         verify(projectJDBC, times(1)).updateProject(any(Project.class));
     }

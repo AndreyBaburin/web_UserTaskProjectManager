@@ -2,6 +2,8 @@ package com.aston.andrey_baburin.controller;
 
 import com.aston.andrey_baburin.entity.Task;
 import com.aston.andrey_baburin.entity.User;
+import com.aston.andrey_baburin.entity.dto.TaskDto;
+import com.aston.andrey_baburin.entity.dto.UserDto;
 import com.aston.andrey_baburin.processor.TaskProcessor;
 import com.aston.andrey_baburin.processor.UserProcessor;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,11 +49,11 @@ class TaskServletTest extends Mockito {
         when(request.getParameter("title")).thenReturn("Task title");
         when(request.getParameter("id")).thenReturn("1");
 
-        when(userProcessor.getUserById(1)).thenReturn(new User());
+        when(userProcessor.getUserById(1)).thenReturn(new UserDto());
 
         taskServlet.doPost(request, response);
 
-        verify(taskProcessor).createTask(any(Task.class));
+        verify(taskProcessor).createTask(any(TaskDto.class));
         verify(response).sendRedirect(anyString());
     }
 
@@ -89,13 +91,13 @@ class TaskServletTest extends Mockito {
     void testAddTask() throws IOException {
         when(request.getParameter("title")).thenReturn("test title");
         when(request.getParameter("id")).thenReturn("77");
-        when(userProcessor.getUserById(77)).thenReturn(new User());
+        when(userProcessor.getUserById(77)).thenReturn(new UserDto());
 
 
         when(request.getContextPath()).thenReturn("/test");
         taskServlet.addTask(request, response);
 
-        verify(taskProcessor).createTask(any(Task.class));
+        verify(taskProcessor).createTask(any(TaskDto.class));
         verify(response).sendRedirect("/test/tasks?action=tasksPage");
     }
 
@@ -105,12 +107,12 @@ class TaskServletTest extends Mockito {
         when(request.getParameter("title")).thenReturn("test title2");
         when(request.getParameter("user")).thenReturn("2");
 
-        when(userProcessor.getUserById(2)).thenReturn(new User());
+        when(userProcessor.getUserById(2)).thenReturn(new UserDto());
 
         when(request.getContextPath()).thenReturn("/test");
         taskServlet.updateTask(request, response);
 
-        verify(taskProcessor).updateTask(any(Task.class));
+        verify(taskProcessor).updateTask(any(TaskDto.class));
         verify(response).sendRedirect("/test/tasks?action=tasksPage");
     }
 
@@ -126,9 +128,9 @@ class TaskServletTest extends Mockito {
 
     @Test
     void testShowAllTasks() throws Exception {
-        List<Task> tasks = new ArrayList<>();
-        tasks.add(new Task());
-        tasks.add(new Task());
+        List<TaskDto> tasks = new ArrayList<>();
+        tasks.add(new TaskDto());
+        tasks.add(new TaskDto());
         when(taskProcessor.getAllTasks()).thenReturn(tasks);
         when(request.getRequestDispatcher("tasksPage.jsp")).thenReturn(requestDispatcher);
 

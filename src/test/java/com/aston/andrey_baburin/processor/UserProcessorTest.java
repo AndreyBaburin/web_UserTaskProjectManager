@@ -2,6 +2,7 @@ package com.aston.andrey_baburin.processor;
 
 import com.aston.andrey_baburin.JDBCImpl.UserJDBC;
 import com.aston.andrey_baburin.entity.User;
+import com.aston.andrey_baburin.entity.dto.UserDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -23,7 +24,7 @@ class UserProcessorTest extends Mockito {
 
     @Test
     void testCreateUser() {
-        userProcessor.createUser(new User(99,"Test99", "test@mail.com"));
+        userProcessor.createUser(new UserDto(99,"Test99", "test@mail.com"));
         verify(userJDBC, times(1)).addUser(any(User.class));
     }
 
@@ -35,7 +36,7 @@ class UserProcessorTest extends Mockito {
 
     @Test
     void testUpdateUser() {
-        userProcessor.updateUser(new User(99,"Test100", "test100@mail.com"));
+        userProcessor.updateUser(new UserDto(99,"Test100", "test100@mail.com"));
         verify(userJDBC, times(1)).updateUser(any(User.class));
     }
 

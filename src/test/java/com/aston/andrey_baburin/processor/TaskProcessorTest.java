@@ -3,6 +3,8 @@ package com.aston.andrey_baburin.processor;
 import com.aston.andrey_baburin.JDBCImpl.TaskJDBC;
 import com.aston.andrey_baburin.entity.Task;
 import com.aston.andrey_baburin.entity.User;
+import com.aston.andrey_baburin.entity.dto.TaskDto;
+import com.aston.andrey_baburin.entity.dto.UserDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -22,8 +24,8 @@ class TaskProcessorTest extends Mockito {
 
     @Test
     void testCreateTask() {
-        User user = new User(77, "Test77", "test@mail.com");
-        Task task = new Task(1, "Test Task", user);
+        UserDto user = new UserDto(77, "Test77", "test@mail.com");
+        TaskDto task = new TaskDto(1, "Test Task", user);
         taskProcessor.createTask(task);
         verify(taskJDBC, times(1)).addTask(any(Task.class));
     }
@@ -36,8 +38,8 @@ class TaskProcessorTest extends Mockito {
 
     @Test
     void testUpdateTask() {
-        User user = new User(77, "Test77", "test@mail.com");
-        Task task = new Task(1, "Test newTask", user);
+        UserDto user = new UserDto(77, "Test77", "test@mail.com");
+        TaskDto task = new TaskDto(1, "Test newTask", user);
         taskProcessor.updateTask(task);
         verify(taskJDBC, times(1)).updateTask(any(Task.class));
     }

@@ -5,6 +5,8 @@ import com.aston.andrey_baburin.JDBCImpl.ProjectJDBC;
 import com.aston.andrey_baburin.JDBCImpl.TaskJDBC;
 import com.aston.andrey_baburin.entity.Project;
 import com.aston.andrey_baburin.entity.Task;
+import com.aston.andrey_baburin.entity.dto.ProjectDto;
+import com.aston.andrey_baburin.entity.dto.TaskDto;
 import com.aston.andrey_baburin.processor.ProjectProcessor;
 import com.aston.andrey_baburin.processor.TaskProcessor;
 import com.aston.andrey_baburin.util.DBConnector;
@@ -68,13 +70,13 @@ public class ProjectServlet extends HttpServlet {
         }
     }
 
-    private List<Task> fillParamOfTasks(HttpServletRequest request) {
-        List<Task> tasks = new ArrayList<>();
+    private List<TaskDto> fillParamOfTasks(HttpServletRequest request) {
+        List<TaskDto> tasks = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
             String taskParam = "task" + i;
             String taskId = request.getParameter(taskParam);
             if (taskId != null && !taskId.isEmpty() && !taskId.equals("0")) {
-                Task task = taskProcessor.getTaskById(Integer.parseInt(taskId));
+                TaskDto task = taskProcessor.getTaskById(Integer.parseInt(taskId));
                 tasks.add(task);
             }
         }
@@ -84,11 +86,11 @@ public class ProjectServlet extends HttpServlet {
     public void addProject(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         String definition = request.getParameter("definition");
-        List<Task> tasks = fillParamOfTasks(request);
-        Project project = new Project();
-        project.setDefinition(definition);
-        project.setTasksOfProject(tasks);
-        projectProcessor.createProject(project);
+        List<TaskDto> tasks = fillParamOfTasks(request);
+        ProjectDto projectDto = new ProjectDto();
+        projectDto.setDefinition(definition);
+        projectDto.setTasksOfProject(tasks);
+        projectProcessor.createProject(projectDto);
         response.sendRedirect(request.getContextPath() + projectPageURL);
     }
 
@@ -96,15 +98,15 @@ public class ProjectServlet extends HttpServlet {
             throws IOException {
         String id = request.getParameter("id");
         String definition = request.getParameter("definition");
-        List<Task> tasks = fillParamOfTasks(request);
+        List<TaskDto> tasks = fillParamOfTasks(request);
 
         if (id != null) {
             try {
-                Project project = new Project();
-                project.setId(Integer.parseInt(id));
-                project.setDefinition(definition);
-                project.setTasksOfProject(tasks);
-                projectProcessor.updateProject(project);
+                ProjectDto projectDto = new ProjectDto();
+                projectDto.setId(Integer.parseInt(id));
+                projectDto.setDefinition(definition);
+                projectDto.setTasksOfProject(tasks);
+                projectProcessor.updateProject(projectDto);
                 response.sendRedirect(request.getContextPath() + projectPageURL);
 
             } catch (NumberFormatException e) {
@@ -132,7 +134,7 @@ public class ProjectServlet extends HttpServlet {
 
     public void showAllProjects(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Project> projects = projectProcessor.getAllProject();
+        List<ProjectDto> projects = projectProcessor.getAllProject();
         request.setAttribute("projects", projects);
         request.getRequestDispatcher("projectPage.jsp").forward(request, response);
     }
@@ -140,7 +142,7 @@ public class ProjectServlet extends HttpServlet {
     public void showTasksOfProject(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("project_id");
-        List<Task> tasks = projectProcessor.getTasksOfProject(Integer.parseInt(id));
+        List<TaskDto> tasks = projectProcessor.getTasksOfProject(Integer.parseInt(id));
         request.setAttribute("tasks", tasks);
         request.getRequestDispatcher("projectPage.jsp").forward(request, response);
     }

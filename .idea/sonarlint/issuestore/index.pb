@@ -82,3 +82,15 @@ t
 Dsrc/test/java/com/aston/andrey_baburin/util/CustomExceptionTest.java,8\a\8a30132a70d1c3c19ae4b1017a3072f3c08792cb
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+n
+>src/main/java/com/aston/andrey_baburin/entity/dto/UserDto.java,5\c\5cb9b503f8057476dc5096cabbbe8b8810088b62
+t
+Dsrc/main/java/com/aston/andrey_baburin/entity/mapper/UserMapper.java,7\a\7a5ecd8adc0968329d6430e84cd53ee6a9dbcdf4
+n
+>src/main/java/com/aston/andrey_baburin/entity/dto/TaskDto.java,5\8\58732031373236095a84a67af4f1b804dab1a011
+t
+Dsrc/main/java/com/aston/andrey_baburin/entity/mapper/TaskMapper.java,1\b\1b677d6aba56e3328c90e0271fdc0c3c7eb8df15
+q
+Asrc/main/java/com/aston/andrey_baburin/entity/dto/ProjectDto.java,5\3\53a4837f3ede3295cfb2c93bf7bd5ee369ff9258
+w
+Gsrc/main/java/com/aston/andrey_baburin/entity/mapper/ProjectMapper.java,2\0\202923b042e8d701f9cd574531679e7b083c9bf8

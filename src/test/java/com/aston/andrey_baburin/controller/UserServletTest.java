@@ -1,6 +1,7 @@
 package com.aston.andrey_baburin.controller;
 
 import com.aston.andrey_baburin.entity.User;
+import com.aston.andrey_baburin.entity.dto.UserDto;
 import com.aston.andrey_baburin.processor.UserProcessor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,7 @@ class UserServletTest extends Mockito {
 
         userServlet.doPost(request, response);
 
-        verify(userProcessor).createUser(any(User.class));
+        verify(userProcessor).createUser(any(UserDto.class));
         verify(response).sendRedirect(anyString());
     }
 
@@ -90,9 +91,9 @@ class UserServletTest extends Mockito {
 
     @Test
     void testShowAllUsers() throws Exception {
-        List<User> users = new ArrayList<>();
-        users.add(new User());
-        users.add(new User());
+        List<UserDto> users = new ArrayList<>();
+        users.add(new UserDto());
+        users.add(new UserDto());
         when(userProcessor.getAllUsers()).thenReturn(users);
         when(request.getRequestDispatcher("allUsers.jsp")).thenReturn(requestDispatcher);
 

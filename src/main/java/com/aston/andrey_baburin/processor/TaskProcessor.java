@@ -3,6 +3,9 @@ package com.aston.andrey_baburin.processor;
 
 import com.aston.andrey_baburin.JDBCImpl.TaskJDBC;
 import com.aston.andrey_baburin.entity.Task;
+import com.aston.andrey_baburin.entity.dto.TaskDto;
+import com.aston.andrey_baburin.entity.mapper.TaskMapper;
+import com.aston.andrey_baburin.entity.mapper.UserMapper;
 import com.aston.andrey_baburin.services.TaskService;
 
 
@@ -18,16 +21,20 @@ public class TaskProcessor implements TaskService {
     }
 
     @Override
-    public List<Task> getAllTasks() {
-        return taskJDBC.getAllTasks();
+    public List<TaskDto> getAllTasks() {
+        List<Task> tasks = taskJDBC.getAllTasks();
+        return TaskMapper.INSTANCE.toDtoList(tasks);
     }
 
     @Override
-    public void createTask(Task task) {taskJDBC.addTask(task);
+    public void createTask(TaskDto taskDto) {
+        Task task = TaskMapper.INSTANCE.toEntity(taskDto);
+        taskJDBC.addTask(task);
     }
 
     @Override
-    public void updateTask(Task task) {
+    public void updateTask(TaskDto taskDto) {
+        Task task = TaskMapper.INSTANCE.toEntity(taskDto);
         taskJDBC.updateTask(task);
     }
 
@@ -37,7 +44,7 @@ public class TaskProcessor implements TaskService {
     }
 
     @Override
-    public Task getTaskById(int id) {
-        return taskJDBC.getTaskById(id);
+    public TaskDto getTaskById(int id) {
+        return TaskMapper.INSTANCE.toDto(taskJDBC.getTaskById(id));
     }
 }

@@ -2,6 +2,8 @@ package com.aston.andrey_baburin.controller;
 
 import com.aston.andrey_baburin.entity.Project;
 import com.aston.andrey_baburin.entity.Task;
+import com.aston.andrey_baburin.entity.dto.ProjectDto;
+import com.aston.andrey_baburin.entity.dto.TaskDto;
 import com.aston.andrey_baburin.processor.ProjectProcessor;
 import com.aston.andrey_baburin.processor.TaskProcessor;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,15 +54,15 @@ class ProjectServletTest extends Mockito {
         when(request.getParameter("task4")).thenReturn("4");
         when(request.getParameter("task5")).thenReturn("5");
 
-        when(taskProcessor.getTaskById(1)).thenReturn(new Task());
-        when(taskProcessor.getTaskById(2)).thenReturn(new Task());
-        when(taskProcessor.getTaskById(3)).thenReturn(new Task());
-        when(taskProcessor.getTaskById(4)).thenReturn(new Task());
-        when(taskProcessor.getTaskById(5)).thenReturn(new Task());
+        when(taskProcessor.getTaskById(1)).thenReturn(new TaskDto());
+        when(taskProcessor.getTaskById(2)).thenReturn(new TaskDto());
+        when(taskProcessor.getTaskById(3)).thenReturn(new TaskDto());
+        when(taskProcessor.getTaskById(4)).thenReturn(new TaskDto());
+        when(taskProcessor.getTaskById(5)).thenReturn(new TaskDto());
 
         projectServlet.doPost(request, response);
 
-        verify(projectProcessor).createProject(any(Project.class));
+        verify(projectProcessor).createProject(any(ProjectDto.class));
         verify(response).sendRedirect(anyString());
     }
 
@@ -103,16 +105,16 @@ class ProjectServletTest extends Mockito {
         when(request.getParameter("task4")).thenReturn("2");
         when(request.getParameter("task5")).thenReturn("1");
 
-        when(taskProcessor.getTaskById(5)).thenReturn(new Task());
-        when(taskProcessor.getTaskById(4)).thenReturn(new Task());
-        when(taskProcessor.getTaskById(3)).thenReturn(new Task());
-        when(taskProcessor.getTaskById(2)).thenReturn(new Task());
-        when(taskProcessor.getTaskById(1)).thenReturn(new Task());
+        when(taskProcessor.getTaskById(5)).thenReturn(new TaskDto());
+        when(taskProcessor.getTaskById(4)).thenReturn(new TaskDto());
+        when(taskProcessor.getTaskById(3)).thenReturn(new TaskDto());
+        when(taskProcessor.getTaskById(2)).thenReturn(new TaskDto());
+        when(taskProcessor.getTaskById(1)).thenReturn(new TaskDto());
 
         when(request.getContextPath()).thenReturn("/test");
         projectServlet.addProject(request, response);
 
-        verify(projectProcessor).createProject(any(Project.class));
+        verify(projectProcessor).createProject(any(ProjectDto.class));
         verify(response).sendRedirect("/test/projects?action=projectPage");
     }
 
@@ -126,14 +128,14 @@ class ProjectServletTest extends Mockito {
         when(request.getParameter("task4")).thenReturn("0");
         when(request.getParameter("task5")).thenReturn("0");
 
-        when(taskProcessor.getTaskById(3)).thenReturn(new Task());
-        when(taskProcessor.getTaskById(2)).thenReturn(new Task());
-        when(taskProcessor.getTaskById(1)).thenReturn(new Task());
+        when(taskProcessor.getTaskById(3)).thenReturn(new TaskDto());
+        when(taskProcessor.getTaskById(2)).thenReturn(new TaskDto());
+        when(taskProcessor.getTaskById(1)).thenReturn(new TaskDto());
 
         when(request.getContextPath()).thenReturn("/test");
         projectServlet.updateProject(request, response);
 
-        verify(projectProcessor).updateProject(any(Project.class));
+        verify(projectProcessor).updateProject(any(ProjectDto.class));
         verify(response).sendRedirect("/test/projects?action=projectPage");
     }
 
@@ -149,9 +151,9 @@ class ProjectServletTest extends Mockito {
 
     @Test
     void testShowAllProjects() throws ServletException, IOException {
-        List<Project> projects = new ArrayList<>();
-        projects.add(new Project());
-        projects.add(new Project());
+        List<ProjectDto> projects = new ArrayList<>();
+        projects.add(new ProjectDto());
+        projects.add(new ProjectDto());
 
         when(projectProcessor.getAllProject()).thenReturn(projects);
         when(request.getRequestDispatcher("projectPage.jsp")).thenReturn(requestDispatcher);
@@ -166,9 +168,9 @@ class ProjectServletTest extends Mockito {
     @Test
     void showTasksOfProject() throws ServletException, IOException {
         when(request.getParameter("project_id")).thenReturn("1");
-        List<Task> tasks = new ArrayList<>();
-        tasks.add(new Task());
-        tasks.add(new Task());
+        List<TaskDto> tasks = new ArrayList<>();
+        tasks.add(new TaskDto());
+        tasks.add(new TaskDto());
         when(projectProcessor.getTasksOfProject(1)).thenReturn(tasks);
         when(request.getRequestDispatcher("projectPage.jsp")).thenReturn(requestDispatcher);
 

@@ -4,6 +4,7 @@ package com.aston.andrey_baburin.controller;
 
 import com.aston.andrey_baburin.JDBCImpl.UserJDBC;
 import com.aston.andrey_baburin.entity.User;
+import com.aston.andrey_baburin.entity.dto.UserDto;
 import com.aston.andrey_baburin.processor.UserProcessor;
 import com.aston.andrey_baburin.util.DBConnector;
 
@@ -62,16 +63,16 @@ public class UserServlet extends HttpServlet {
             throws IOException {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
-        User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        userProcessor.createUser(user);
+        UserDto userDto = new UserDto();
+        userDto.setName(name);
+        userDto.setEmail(email);
+        userProcessor.createUser(userDto);
         response.sendRedirect(request.getContextPath() + showAllURL);
     }
 
     public void showAllUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<User> users = userProcessor.getAllUsers();
+        List<UserDto> users = userProcessor.getAllUsers();
         request.setAttribute("users", users);
         request.getRequestDispatcher("allUsers.jsp").forward(request, response);
     }
@@ -84,11 +85,11 @@ public class UserServlet extends HttpServlet {
 
         if (id != null) {
             try {
-                User user = new User();
-                user.setId(Integer.parseInt(id));
-                user.setName(name);
-                user.setEmail(email);
-                userProcessor.updateUser(user);
+                UserDto userDto = new UserDto();
+                userDto.setId(Integer.parseInt(id));
+                userDto.setName(name);
+                userDto.setEmail(email);
+                userProcessor.updateUser(userDto);
                 response.sendRedirect(request.getContextPath() + showAllURL);
             } catch (NumberFormatException e) {
                 response.getWriter().println("Invalid user ID format");

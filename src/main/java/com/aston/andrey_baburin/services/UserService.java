@@ -2,16 +2,17 @@ package com.aston.andrey_baburin.services;
 
 
 import com.aston.andrey_baburin.entity.User;
+import com.aston.andrey_baburin.entity.dto.UserDto;
 
 import java.util.List;
 
 public interface UserService {
-    void createUser(User user);
+    void createUser(UserDto userDto);
 
-    List<User> getAllUsers();
-    User getUserById(int id);
+    List<UserDto> getAllUsers();
+    UserDto getUserById(int id);
 
-    void updateUser(User user);
+    void updateUser(UserDto userDto);
 
     void deleteUserById(int id);
 
